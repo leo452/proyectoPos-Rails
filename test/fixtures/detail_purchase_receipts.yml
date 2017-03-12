@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  purchase_receipt_id: 
+  product_id: 
+  cantidad: 1
+  valor_total: 9.99
+
+two:
+  purchase_receipt_id: 
+  product_id: 
+  cantidad: 1
+  valor_total: 9.99

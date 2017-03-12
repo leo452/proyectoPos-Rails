@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+<div class="paginas">
+<h1>Lista de Proveedores</h1>
+  <strong><%= link_to 'Nuevo proveedor', new_provider_path %></strong>
+<table width="1000" border="1" id="t01">
+  <thead>
+    <tr>
+      <th width="100" align="left" >Nit</th>
+      <th width="160" align="left" >Nombre</th>
+      <th width="120" align="left" >Departamento</th>
+      <th width="100" align="left" >Ciudad</th>
+      <th width="100" >Telefono</th>
+      <th width="200" >Direccion</th>
+      <th width="60">Ver</th>
+      <th width="60">Editar</th>
+      <th width="60">Eliminar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @providers.each do |provider| %>
+      <tr>
+        <td align="left"><%= provider.nit %></td>
+        <td><%= provider.nombre %></td>
+        <td align="center"><%= provider.departamento %></td>
+        <td><%= provider.ciudad %></td>
+        <td align="center"><%= provider.telefono %></td>
+        <td><%= provider.direccion %></td>
+
+
+
+        <td align="center"><%= link_to image_tag('ver.png', title: 'Ver'), provider %></td>
+
+            <td align="center"><%= link_to image_tag('edit.png', title: 'Editar'), edit_provider_path(provider) %></td>
+            <td align="center"><%= link_to image_tag('eliminar.png', title: 'Eliminar'), provider, method: :delete, data: { confirm: 'Esta seguro de eliminar?' } %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+
+</div>

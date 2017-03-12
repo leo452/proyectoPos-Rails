@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @purchase_receipt.product %>
+</p>
+
+<p>
+  <strong>Provider:</strong>
+  <%= @purchase_receipt.provider %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @purchase_receipt.fecha %>
+</p>
+
+<p>
+  <strong>Numero factura:</strong>
+  <%= @purchase_receipt.numero_factura %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @purchase_receipt.cantidad %>
+</p>
+
+<p>
+  <strong>Costo unitario:</strong>
+  <%= @purchase_receipt.costo_unitario %>
+</p>
+
+<p>
+  <strong>Valor total:</strong>
+  <%= @purchase_receipt.valor_total %>
+</p>
+
+<%= link_to 'Edit', edit_purchase_receipt_path(@purchase_receipt) %> |
+<%= link_to 'Back', purchase_receipts_path %>

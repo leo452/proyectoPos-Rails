@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+<div class="paginas">
+
+<h1>Lista de Productos</h1>
+<strong><%= link_to 'Nuevo Producto', new_product_path %></strong>
+  <strong><%= link_to'Comprar Producto', new_purchase_receipt_path %></strong>
+
+
+<table width="1000" id="t01" border="1">
+  <thead>
+    <tr>
+      <th align="left">Nombre</th>
+      <th>Cantidad</th>
+      <th width="200" align="right">Valor unitario</th>
+      <th>Categoría</th>
+
+      <th>Ver</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td align="left"><%= product.nombre %></td>
+
+
+        <td align="right"><%= product.cantidad %></td>
+        <td align="right"><%= product.valor_unitario %></td>
+
+        <td><%= product.category %></td>
+
+
+        <td align="center"><%= link_to image_tag('ver.png', title: 'Ver'), product %></td>
+        <td align="center"><%= link_to image_tag('edit.png', title: 'Editar'), edit_product_path(product) %></td>
+        <td align="center"><%= link_to image_tag('eliminar.png', title: 'Eliminar'), product, method: :delete, data: { confirm: 'Esta seguro de eliminar?' } %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+</div>
+

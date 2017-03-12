@@ -1,0 +1,45 @@
+<div class="paginas">
+<p id="notice"><%= notice %></p>
+<h1 align="center">Producto</h1><hr>
+  <div>
+    <strong>Nombre:</strong> <%= @product.nombre %>
+  </div>
+  <div>
+    <% if @product.category!= nil %>
+        <strong>Categoría: </strong>
+
+        <%= @product.category %>
+
+    <% end %>
+
+  </div>
+
+
+
+
+  <br>
+
+  <div>
+
+
+      <% if @product.descripcion!= nil %>
+          <strong>Descripción:</strong>
+
+           <p> <%= @product.descripcion %> </p>
+
+      <% end %>
+
+
+  </div>
+
+<div>
+  <strong>Cantidad: </strong><%= @product.cantidad %>
+</div><br>
+  <div>
+    <strong>Valor unitario: </strong>$<%= @product.valor_unitario %>
+  </div>
+<br>
+
+<%= link_to 'Editar', edit_product_path(@product) %> |
+<%= link_to 'Volver', products_path %>
+</div>

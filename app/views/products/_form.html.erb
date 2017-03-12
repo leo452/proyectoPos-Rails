@@ -1,0 +1,60 @@
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <table >
+      <tr>
+        <td align="left"><strong>Nombre(*):</strong></td>
+        <td><strong>Categoría:</strong></td>
+      </tr>
+      <tr>
+        <td><%= f.text_field :nombre %></td>
+        <td><%= f.select(:category_id, @category_options) %></td>
+      </tr>
+
+    </table>
+
+    <table>
+      <tr>
+        <td align="center">
+          <strong>Descripción:</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.text_area :descripcion %>
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <td>
+          <strong>Cantidad:</strong>
+        </td>
+        <td>
+          <strong>Valor unitario(*):</strong>
+        </td>
+
+      </tr>
+      <tr>
+        <td><%= f.number_field :cantidad %></td>
+        <td><%= f.number_field :valor_unitario %></td>
+      </tr>
+
+    </table><br>
+
+
+
+  <div class="actions">
+    <%= f.submit 'Guardar'%>
+  </div>
+<% end %>

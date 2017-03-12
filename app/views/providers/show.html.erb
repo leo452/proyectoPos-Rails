@@ -1,0 +1,62 @@
+<div class="paginas">
+<p id="notice"><%= notice %></p>
+  <h1>Proveedor</h1><br>
+  <hr>
+
+  <table  width="500" >
+    <tr>
+      <td>
+        <strong>Nit:</strong>
+      </td>
+      <td align="left">
+        <%= @provider.nit %>
+      </td>
+      <td>
+        <strong>Nombre:</strong>
+      </td>
+      <td align="left">
+        <%= @provider.nombre %>
+      </td>
+
+    </tr>
+    <tr>
+      <td width="100">
+        <strong>Departamento:</strong>
+
+      </td>
+      <td align="left">
+        <%= @provider.departamento %>
+      </td>
+      <td>
+        <strong>Ciudad:</strong>
+
+      </td>
+
+      <td align="left">
+        <%= @provider.ciudad %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Telefono:</strong>
+
+      </td >
+      <td align="left">
+        <%= @provider.telefono %>
+      </td>
+      <td align="left" width="100">
+        <strong>Direccion:</strong>
+
+      </td>
+
+
+      <td align="left">
+        <%= @provider.direccion %>
+      </td>
+    </tr>
+  </table>
+
+
+<%= link_to 'Editar', edit_provider_path(@provider) %> |
+<%= link_to 'Atrás', providers_path %>
+</div>

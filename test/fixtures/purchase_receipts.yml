@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 
+  provider_id: 
+  fecha: 2016-11-05
+  numero_factura: 1
+  cantidad: 1
+  costo_unitario: 9.99
+  valor_total: 9.99
+
+two:
+  product_id: 
+  provider_id: 
+  fecha: 2016-11-05
+  numero_factura: 1
+  cantidad: 1
+  costo_unitario: 9.99
+  valor_total: 9.99

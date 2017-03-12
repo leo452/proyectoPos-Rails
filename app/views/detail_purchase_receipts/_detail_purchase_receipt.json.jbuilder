@@ -1,0 +1,2 @@
+json.extract! detail_purchase_receipt, :id, :purchase_receipt_id, :product_id, :cantidad, :valor_total, :created_at, :updated_at
+json.url detail_purchase_receipt_url(detail_purchase_receipt, format: :json)

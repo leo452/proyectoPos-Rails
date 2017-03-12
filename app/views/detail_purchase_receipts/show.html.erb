@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Purchase receipt:</strong>
+  <%= @detail_purchase_receipt.purchase_receipt %>
+</p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @detail_purchase_receipt.product %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @detail_purchase_receipt.cantidad %>
+</p>
+
+<p>
+  <strong>Valor total:</strong>
+  <%= @detail_purchase_receipt.valor_total %>
+</p>
+
+<%= link_to 'Edit', edit_detail_purchase_receipt_path(@detail_purchase_receipt) %> |
+<%= link_to 'Back', detail_purchase_receipts_path %>
