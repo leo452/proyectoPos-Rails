@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108171054) do
+ActiveRecord::Schema.define(version: 20170313044316) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "nombre"
@@ -68,16 +68,16 @@ ActiveRecord::Schema.define(version: 20161108171054) do
   add_index "details", ["receipt_id"], name: "index_details_on_receipt_id"
 
   create_table "discounts", force: :cascade do |t|
-    t.integer  "society_id"
-    t.integer  "category_id"
+    t.integer  "categories_id"
     t.integer  "discount_porcentaje"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "user_id"
+    t.integer  "society_id"
+    t.integer  "category_id"
   end
 
-  add_index "discounts", ["category_id"], name: "index_discounts_on_category_id"
-  add_index "discounts", ["society_id"], name: "index_discounts_on_society_id"
+  add_index "discounts", ["categories_id"], name: "index_discounts_on_categories_id"
 
   create_table "forma_de_pagos", force: :cascade do |t|
     t.string   "nombre"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20161108171054) do
   create_table "receipts", force: :cascade do |t|
     t.date     "fecha"
     t.float    "valor_total"
-    t.integer  "client_id"
+    t.integer  "clients_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "soporte_file_name"
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 20161108171054) do
     t.integer  "membership_id"
   end
 
-  add_index "receipts", ["client_id"], name: "index_receipts_on_client_id"
+  add_index "receipts", ["clients_id"], name: "index_receipts_on_clients_id"
   add_index "receipts", ["forma_de_pago_id"], name: "index_receipts_on_forma_de_pago_id"
   add_index "receipts", ["membership_id"], name: "index_receipts_on_membership_id"
 
