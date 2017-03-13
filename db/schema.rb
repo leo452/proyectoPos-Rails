@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313044316) do
+ActiveRecord::Schema.define(version: 20170313045723) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "nombre"
@@ -150,7 +150,6 @@ ActiveRecord::Schema.define(version: 20170313044316) do
   create_table "receipts", force: :cascade do |t|
     t.date     "fecha"
     t.float    "valor_total"
-    t.integer  "clients_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "soporte_file_name"
@@ -160,9 +159,9 @@ ActiveRecord::Schema.define(version: 20170313044316) do
     t.integer  "forma_de_pago_id"
     t.integer  "user_id"
     t.integer  "membership_id"
+    t.integer  "client_id"
   end
 
-  add_index "receipts", ["clients_id"], name: "index_receipts_on_clients_id"
   add_index "receipts", ["forma_de_pago_id"], name: "index_receipts_on_forma_de_pago_id"
   add_index "receipts", ["membership_id"], name: "index_receipts_on_membership_id"
 

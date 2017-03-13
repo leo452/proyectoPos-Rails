@@ -48938,3 +48938,1637 @@ Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.
 
 Started GET "/assets/1.jpg" for 10.240.1.60 at 2017-03-13 04:46:32 +0000
 Cannot render console from 10.240.1.60! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddCategoryIdToDiscounts (20170313044316)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.8ms)[0m  [1mCREATE TEMPORARY TABLE "adiscounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "categories_id" integer, "discount_porcentaje" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer, "society_id" integer, "category_id" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_adiscounts_on_categories_id" ON "adiscounts" ("categories_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "discounts"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "discounts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "discounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "categories_id" integer, "discount_porcentaje" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer, "society_id" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_adiscounts_on_categories_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_adiscounts_on_categories_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_discounts_on_categories_id" ON "discounts" ("categories_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "adiscounts"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "adiscounts"[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20170313044316"]]
+  [1m[36m (10.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddSocietyIdToDiscounts (20170313042937)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "adiscounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "categories_id" integer, "discount_porcentaje" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer, "society_id" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "tindex_adiscounts_on_categories_id" ON "adiscounts" ("categories_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "discounts"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "discounts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "discounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "categories_id" integer, "discount_porcentaje" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_adiscounts_on_categories_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_adiscounts_on_categories_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_discounts_on_categories_id" ON "discounts" ("categories_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "adiscounts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "adiscounts"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20170313042937"]]
+  [1m[35m (10.0ms)[0m  commit transaction
+Migrating to CreateDetailPurchaseReceipts (20161108171054)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "detail_purchase_receipts"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161108171054"]]
+  [1m[35m (12.4ms)[0m  commit transaction
+Migrating to RemoveValorTotalProductoToPurchaseReceipts (20161108170719)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "purchase_receipts" ADD "valor_total_producto" decimal
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161108170719"]]
+  [1m[35m (9.4ms)[0m  commit transaction
+Migrating to RemoveCostoUnitarioToPurchaseReceipts (20161108170618)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "purchase_receipts" ADD "costo_unitario" decimal
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161108170618"]]
+  [1m[35m (11.3ms)[0m  commit transaction
+Migrating to RemoveProductIdToPurchaseReceipts (20161108170525)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "purchase_receipts" ADD "product_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161108170525"]]
+  [1m[35m (8.9ms)[0m  commit transaction
+Migrating to RemoveCantidadToPurchaseReceipts (20161108170415)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "purchase_receipts" ADD "cantidad" integer
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161108170415"]]
+  [1m[35m (9.2ms)[0m  commit transaction
+Migrating to AddValorTotalProductoToPurchaseReceipts (20161108162418)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "apurchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "fecha" date, "numero_factura" integer, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal, "costo_unitario" decimal, "product_id" integer, "cantidad" integer) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_apurchase_receipts_on_provider_id" ON "apurchase_receipts" ("provider_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "purchase_receipts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "purchase_receipts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "purchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "fecha" date, "numero_factura" integer, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "costo_unitario" decimal, "product_id" integer, "cantidad" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_purchase_receipts_on_provider_id" ON "purchase_receipts" ("provider_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apurchase_receipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "apurchase_receipts"[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20161108162418"]]
+  [1m[36m (10.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddDescripcionToProducts (20161107072407)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "aproducts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category_id" integer, "nombre" varchar, "cantidad" integer, "valor_unitario" decimal, "valorC_total" decimal, "articulo" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "descripcion" text) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_products_on_category_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_products_on_category_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "tindex_aproducts_on_category_id" ON "aproducts" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "products"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "products"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category_id" integer, "nombre" varchar, "cantidad" integer, "valor_unitario" decimal, "valorC_total" decimal, "articulo" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_aproducts_on_category_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_aproducts_on_category_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_products_on_category_id" ON "products" ("category_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aproducts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "aproducts"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161107072407"]]
+  [1m[35m (10.1ms)[0m  commit transaction
+Migrating to CreateDetails (20161105225633)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "details"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161105225633"]]
+  [1m[35m (10.6ms)[0m  commit transaction
+Migrating to CreatePurchaseReceipts (20161105204304)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "purchase_receipts"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161105204304"]]
+  [1m[35m (11.1ms)[0m  commit transaction
+Migrating to CreateProviders (20161105203609)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "providers"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161105203609"]]
+  [1m[35m (9.3ms)[0m  commit transaction
+Migrating to CreateProducts (20161105202306)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "products"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161105202306"]]
+  [1m[35m (9.9ms)[0m  commit transaction
+Migrating to CreateOutflows (20161018184855)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "outflows"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20161018184855"]]
+  [1m[35m (11.8ms)[0m  commit transaction
+Migrating to AddMembershipIdToReceipts (20160928222727)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "areceipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_name" varchar, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime, "forma_de_pago_id" integer, "user_id" integer, "membership_id" integer) 
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_membership_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "tindex_areceipts_on_membership_id" ON "areceipts" ("membership_id")
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "tindex_areceipts_on_forma_de_pago_id" ON "areceipts" ("forma_de_pago_id")[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_areceipts_on_clients_id" ON "areceipts" ("clients_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "receipts"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "receipts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_name" varchar, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime, "forma_de_pago_id" integer, "user_id" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_forma_de_pago_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_membership_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_receipts_on_clients_id" ON "receipts" ("clients_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_receipts_on_forma_de_pago_id" ON "receipts" ("forma_de_pago_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "areceipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "areceipts"[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160928222727"]]
+  [1m[36m (11.1ms)[0m  [1mcommit transaction[0m
+Migrating to AddAcumuladoToMemberships (20160928222117)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "amemberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "society_id" integer, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_vencimiento" date, "fecha_cuota" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "estado" boolean, "user_id" integer, "pago_acomulado" float) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "tindex_amemberships_on_society_id" ON "amemberships" ("society_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "memberships"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "memberships"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "memberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "society_id" integer, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_vencimiento" date, "fecha_cuota" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "estado" boolean, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_amemberships_on_society_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_amemberships_on_society_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_memberships_on_society_id" ON "memberships" ("society_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "amemberships"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "amemberships"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160928222117"]]
+  [1m[35m (11.4ms)[0m  commit transaction
+Migrating to AddPasswordDigestToUsers (20160923195333)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "admin" boolean DEFAULT 'f', "password_digest" varchar) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "users"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "ausers" ("id","username","email","created_at","updated_at","admin","password_digest") VALUES (1, 'leonardo', 'leonardo.merchan.1992@gmail.com', '2017-03-13 04:44:57.989616', '2017-03-13 04:44:57.989616', 'f', '$2a$10$W/r3bDOHbvOQKD/Cpm2dD./mPWrBsOEYJPL2wgHIKAUI1msckXSwi')
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "ausers" ("id","username","email","created_at","updated_at","admin","password_digest") VALUES (2, 'esteban', 'mrobayon@unbosque.edu.co', '2017-03-13 04:45:24.471386', '2017-03-13 04:45:24.471386', 'f', '$2a$10$LpPfvW4tIvcJ9VZqOEfDAeULMqHqRDf2E1M3lPezriSBs7UCgI9wK')[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "users"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "admin" boolean DEFAULT 'f') [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "ausers"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "users" ("id","username","email","created_at","updated_at","admin") VALUES (1, 'leonardo', 'leonardo.merchan.1992@gmail.com', '2017-03-13 04:44:57.989616', '2017-03-13 04:44:57.989616', 'f')[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "users" ("id","username","email","created_at","updated_at","admin") VALUES (2, 'esteban', 'mrobayon@unbosque.edu.co', '2017-03-13 04:45:24.471386', '2017-03-13 04:45:24.471386', 'f')
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "ausers"[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160923195333"]]
+  [1m[36m (10.2ms)[0m  [1mcommit transaction[0m
+Migrating to AddAdminToUsers (20160923190637)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "ausers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "admin" boolean DEFAULT 'f') [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "users"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "ausers" ("id","username","email","created_at","updated_at","admin") VALUES (1, 'leonardo', 'leonardo.merchan.1992@gmail.com', '2017-03-13 04:44:57.989616', '2017-03-13 04:44:57.989616', 'f')[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "ausers" ("id","username","email","created_at","updated_at","admin") VALUES (2, 'esteban', 'mrobayon@unbosque.edu.co', '2017-03-13 04:45:24.471386', '2017-03-13 04:45:24.471386', 'f')
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "users"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "ausers"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "users" ("id","username","email","created_at","updated_at") VALUES (1, 'leonardo', 'leonardo.merchan.1992@gmail.com', '2017-03-13 04:44:57.989616', '2017-03-13 04:44:57.989616')
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "users" ("id","username","email","created_at","updated_at") VALUES (2, 'esteban', 'mrobayon@unbosque.edu.co', '2017-03-13 04:45:24.471386', '2017-03-13 04:45:24.471386')[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "ausers"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160923190637"]]
+  [1m[35m (11.0ms)[0m  commit transaction
+Migrating to CreateUsers (20160923185830)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "users"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160923185830"]]
+  [1m[35m (9.7ms)[0m  commit transaction
+Migrating to AddUserIdToMemberships (20160923185542)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "amemberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "society_id" integer, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_vencimiento" date, "fecha_cuota" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "estado" boolean, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_amemberships_on_society_id" ON "amemberships" ("society_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "memberships"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "memberships"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "memberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "society_id" integer, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_vencimiento" date, "fecha_cuota" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "estado" boolean) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_amemberships_on_society_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_amemberships_on_society_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_memberships_on_society_id" ON "memberships" ("society_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "amemberships"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "amemberships"[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160923185542"]]
+  [1m[36m (10.6ms)[0m  [1mcommit transaction[0m
+Migrating to AddUserIdToDiscounts (20160923185050)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "adiscounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "categories_id" integer, "discount_porcentaje" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "tindex_adiscounts_on_categories_id" ON "adiscounts" ("categories_id")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "discounts"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "discounts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "discounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "categories_id" integer, "discount_porcentaje" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_adiscounts_on_categories_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_adiscounts_on_categories_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_discounts_on_categories_id" ON "discounts" ("categories_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "adiscounts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "adiscounts"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160923185050"]]
+  [1m[35m (9.0ms)[0m  commit transaction
+Migrating to AddUserIdToSocieties (20160923185037)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "asocieties" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar, "descripcion" varchar, "val_anual" float, "val_semestral" float, "val_mensual" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "societies"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "asocieties" ("id","nombre","descripcion","val_anual","val_semestral","val_mensual","created_at","updated_at","user_id") VALUES (1, '23132', '213', 3213223.0, 32132.0, 2132.0, '2017-03-13 04:46:29.024803', '2017-03-13 04:46:29.024803', 1)
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "societies"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "societies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar, "descripcion" varchar, "val_anual" float, "val_semestral" float, "val_mensual" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "asocieties"[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "societies" ("id","nombre","descripcion","val_anual","val_semestral","val_mensual","created_at","updated_at") VALUES (1, '23132', '213', 3213223.0, 32132.0, 2132.0, '2017-03-13 04:46:29.024803', '2017-03-13 04:46:29.024803')
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "asocieties"[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160923185037"]]
+  [1m[36m (9.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddUserIdToReceipts (20160923185030)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "areceipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_name" varchar, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime, "forma_de_pago_id" integer, "user_id" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_areceipts_on_forma_de_pago_id" ON "areceipts" ("forma_de_pago_id")
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "tindex_areceipts_on_clients_id" ON "areceipts" ("clients_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "receipts"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "receipts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_name" varchar, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime, "forma_de_pago_id" integer) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_forma_de_pago_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_receipts_on_clients_id" ON "receipts" ("clients_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_receipts_on_forma_de_pago_id" ON "receipts" ("forma_de_pago_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "areceipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "areceipts"[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160923185030"]]
+  [1m[36m (10.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddUserIdToClients (20160923185019)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "aclients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_final_afiliacion" date, "fecha_corte_afiliacion" date, "membership_id" integer, "user_id" integer) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_on_membership_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "tindex_aclients_on_membership_id" ON "aclients" ("membership_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "clients"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "clients"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_final_afiliacion" date, "fecha_corte_afiliacion" date, "membership_id" integer) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_aclients_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_aclients_on_membership_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_clients_on_membership_id" ON "clients" ("membership_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aclients"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "aclients"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160923185019"]]
+  [1m[35m (10.6ms)[0m  commit transaction
+Migrating to AddUserIdToCategories (20160923185010)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "acategories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar, "descripcion" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "user_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "categories"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "categories"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar, "descripcion" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "acategories"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "acategories"[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160923185010"]]
+  [1m[36m (8.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddEstadoToMembership (20160919200515)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TEMPORARY TABLE "amemberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "society_id" integer, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_vencimiento" date, "fecha_cuota" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "estado" boolean) [0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "tindex_amemberships_on_society_id" ON "amemberships" ("society_id")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "memberships"
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "memberships"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "memberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "society_id" integer, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_vencimiento" date, "fecha_cuota" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_amemberships_on_society_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_amemberships_on_society_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_memberships_on_society_id" ON "memberships" ("society_id")
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "amemberships"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "amemberships"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160919200515"]]
+  [1m[35m (11.2ms)[0m  commit transaction
+Migrating to AddMembershipIdToClients (20160919134805)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "aclients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_final_afiliacion" date, "fecha_corte_afiliacion" date, "membership_id" integer) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_on_membership_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "tindex_aclients_on_membership_id" ON "aclients" ("membership_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "clients"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "clients"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_final_afiliacion" date, "fecha_corte_afiliacion" date) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_aclients_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_aclients_on_membership_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aclients"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "aclients"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160919134805"]]
+  [1m[35m (10.2ms)[0m  commit transaction
+Migrating to CreateMemberships (20160919133601)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "memberships"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160919133601"]]
+  [1m[35m (10.8ms)[0m  commit transaction
+Migrating to AddFechaCorteAfiliacionToClients (20160912181731)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "aclients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_final_afiliacion" date, "fecha_corte_afiliacion" date) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "clients"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "clients"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_final_afiliacion" date) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "aclients"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "aclients"[0m
+  [1m[35mSQL (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160912181731"]]
+  [1m[36m (10.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddFechaFinalAfiliacionToClients (20160912181629)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TEMPORARY TABLE "aclients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_final_afiliacion" date) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "clients"
+  [1m[36m (0.4ms)[0m  [1mDROP TABLE "clients"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "aclients"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "aclients"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160912181629"]]
+  [1m[35m (12.2ms)[0m  commit transaction
+Migrating to AddFechaAfiliacionToClients (20160912181329)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TEMPORARY TABLE "aclients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar, "fecha_afiliacion" date) 
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "clients"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "clients"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "aclients"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "aclients"[0m
+  [1m[35mSQL (0.2ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160912181329"]]
+  [1m[36m (10.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddPeriodicidadToClients (20160912180858)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TEMPORARY TABLE "aclients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "periodicidad" varchar) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "clients"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "clients"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aclients"[0m
+  [1m[35m (0.1ms)[0m  DROP TABLE "aclients"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160912180858"]]
+  [1m[35m (11.5ms)[0m  commit transaction
+Migrating to CreateCategories (20160905023643)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "categories"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160905023643"]]
+  [1m[35m (10.0ms)[0m  commit transaction
+Migrating to CreateDiscounts (20160905023625)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "discounts"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160905023625"]]
+  [1m[35m (8.4ms)[0m  commit transaction
+Migrating to CreateSocieties (20160905023557)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "societies"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160905023557"]]
+  [1m[35m (9.7ms)[0m  commit transaction
+Migrating to AddFormaDePagoIdToReceipts (20160831171037)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "areceipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_name" varchar, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime, "forma_de_pago_id" integer) 
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "tindex_areceipts_on_forma_de_pago_id" ON "areceipts" ("forma_de_pago_id")[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_areceipts_on_clients_id" ON "areceipts" ("clients_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "receipts"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "receipts"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_name" varchar, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_forma_de_pago_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_receipts_on_clients_id" ON "receipts" ("clients_id")
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "areceipts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "areceipts"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160831171037"]]
+  [1m[35m (12.3ms)[0m  commit transaction
+Migrating to CreateFormaDePagos (20160831162840)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "forma_de_pagos"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160831162840"]]
+  [1m[35m (11.7ms)[0m  commit transaction
+Migrating to CreateReceipts (20160810170251)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TEMPORARY TABLE "areceipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_name" varchar, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_areceipts_on_clients_id" ON "areceipts" ("clients_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "receipts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "receipts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_receipts_on_clients_id" ON "receipts" ("clients_id")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "areceipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "areceipts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "areceipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_content_type" varchar, "soporte_file_size" integer, "soporte_updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "tindex_areceipts_on_clients_id" ON "areceipts" ("clients_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "receipts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "receipts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_size" integer, "soporte_updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_receipts_on_clients_id" ON "receipts" ("clients_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "areceipts"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "areceipts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "areceipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_file_size" integer, "soporte_updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_areceipts_on_clients_id" ON "areceipts" ("clients_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "receipts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "receipts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_receipts_on_clients_id" ON "receipts" ("clients_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "areceipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "areceipts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "areceipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "soporte_updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_clients_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_areceipts_on_clients_id" ON "areceipts" ("clients_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "receipts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "receipts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "clients_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_areceipts_on_clients_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_receipts_on_clients_id" ON "receipts" ("clients_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "areceipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "areceipts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "receipts"
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160810170251"]]
+  [1m[35m (11.8ms)[0m  commit transaction
+Migrating to CreateClients (20160712152149)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "clients"
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?[0m  [["version", "20160712152149"]]
+  [1m[35m (11.1ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateClients (20160712152149)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "documento" integer, "tipo_documento" varchar, "nombre" varchar, "apellido" varchar, "telefono" integer, "direccion" varchar, "pais" varchar, "ciudad" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160712152149"]]
+  [1m[36m (12.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateReceipts (20160810170251)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "fecha" date, "valor_total" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "receipts" ADD "soporte_file_name" varchar
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "receipts" ADD "soporte_content_type" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "receipts" ADD "soporte_file_size" integer
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "receipts" ADD "soporte_updated_at" datetime[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160810170251"]]
+  [1m[36m (9.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateFormaDePagos (20160831162840)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "forma_de_pagos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160831162840"]]
+  [1m[36m (10.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddFormaDePagoIdToReceipts (20160831171037)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "receipts" ADD "forma_de_pago_id" integer[0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_receipts_on_forma_de_pago_id" ON "receipts" ("forma_de_pago_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160831171037"]]
+  [1m[36m (9.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSocieties (20160905023557)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "societies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar, "descripcion" varchar, "val_anual" float, "val_semestral" float, "val_mensual" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160905023557"]]
+  [1m[36m (8.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDiscounts (20160905023625)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "discounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "categories_id" integer, "discount_porcentaje" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_discounts_on_categories_id" ON "discounts" ("categories_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160905023625"]]
+  [1m[35m (10.2ms)[0m  commit transaction
+Migrating to CreateCategories (20160905023643)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nombre" varchar, "descripcion" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160905023643"]]
+  [1m[35m (9.6ms)[0m  commit transaction
+Migrating to AddPeriodicidadToClients (20160912180858)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "clients" ADD "periodicidad" varchar
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160912180858"]]
+  [1m[35m (8.4ms)[0m  commit transaction
+Migrating to AddFechaAfiliacionToClients (20160912181329)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "clients" ADD "fecha_afiliacion" date
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160912181329"]]
+  [1m[35m (9.6ms)[0m  commit transaction
+Migrating to AddFechaFinalAfiliacionToClients (20160912181629)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "clients" ADD "fecha_final_afiliacion" date
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160912181629"]]
+  [1m[35m (9.8ms)[0m  commit transaction
+Migrating to AddFechaCorteAfiliacionToClients (20160912181731)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "clients" ADD "fecha_corte_afiliacion" date
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160912181731"]]
+  [1m[35m (9.8ms)[0m  commit transaction
+Migrating to CreateMemberships (20160919133601)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "memberships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "society_id" integer, "periodicidad" varchar, "fecha_afiliacion" date, "fecha_vencimiento" date, "fecha_cuota" date, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_memberships_on_society_id" ON "memberships" ("society_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160919133601"]]
+  [1m[36m (9.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddMembershipIdToClients (20160919134805)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "clients" ADD "membership_id" integer[0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_clients_on_membership_id" ON "clients" ("membership_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160919134805"]]
+  [1m[35m (8.3ms)[0m  commit transaction
+Migrating to AddEstadoToMembership (20160919200515)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "memberships" ADD "estado" boolean
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160919200515"]]
+  [1m[35m (8.0ms)[0m  commit transaction
+Migrating to AddUserIdToCategories (20160923185010)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "categories" ADD "user_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923185010"]]
+  [1m[35m (9.0ms)[0m  commit transaction
+Migrating to AddUserIdToClients (20160923185019)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "clients" ADD "user_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923185019"]]
+  [1m[35m (9.0ms)[0m  commit transaction
+Migrating to AddUserIdToReceipts (20160923185030)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "receipts" ADD "user_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923185030"]]
+  [1m[35m (10.4ms)[0m  commit transaction
+Migrating to AddUserIdToSocieties (20160923185037)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "societies" ADD "user_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923185037"]]
+  [1m[35m (12.1ms)[0m  commit transaction
+Migrating to AddUserIdToDiscounts (20160923185050)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "discounts" ADD "user_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923185050"]]
+  [1m[35m (11.6ms)[0m  commit transaction
+Migrating to AddUserIdToMemberships (20160923185542)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "memberships" ADD "user_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923185542"]]
+  [1m[35m (9.4ms)[0m  commit transaction
+Migrating to CreateUsers (20160923185830)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923185830"]]
+  [1m[35m (10.6ms)[0m  commit transaction
+Migrating to AddAdminToUsers (20160923190637)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD "admin" boolean DEFAULT 'f'
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923190637"]]
+  [1m[35m (8.2ms)[0m  commit transaction
+Migrating to AddPasswordDigestToUsers (20160923195333)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "users" ADD "password_digest" varchar
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160923195333"]]
+  [1m[35m (8.3ms)[0m  commit transaction
+Migrating to AddAcumuladoToMemberships (20160928222117)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "memberships" ADD "pago_acomulado" float
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160928222117"]]
+  [1m[35m (7.9ms)[0m  commit transaction
+Migrating to AddMembershipIdToReceipts (20160928222727)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "receipts" ADD "membership_id" integer
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_receipts_on_membership_id" ON "receipts" ("membership_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160928222727"]]
+  [1m[35m (11.0ms)[0m  commit transaction
+Migrating to CreateOutflows (20161018184855)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "outflows" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "feha" date, "concepto" varchar, "nit" integer, "entidad" varchar, "numero_factura" integer, "valor" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161018184855"]]
+  [1m[35m (11.6ms)[0m  commit transaction
+Migrating to CreateProducts (20161105202306)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category_id" integer, "nombre" varchar, "cantidad" integer, "valor_unitario" decimal, "valorC_total" decimal, "articulo" boolean, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_products_on_category_id" ON "products" ("category_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161105202306"]]
+  [1m[36m (9.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateProviders (20161105203609)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "providers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nit" integer, "nombre" varchar, "departamento" varchar, "ciudad" varchar, "telefono" integer, "direccion" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161105203609"]]
+  [1m[36m (9.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePurchaseReceipts (20161105204304)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "purchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "provider_id" integer, "fecha" date, "numero_factura" integer, "cantidad" integer, "costo_unitario" decimal, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_purchase_receipts_on_product_id" ON "purchase_receipts" ("product_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_purchase_receipts_on_provider_id" ON "purchase_receipts" ("provider_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161105204304"]]
+  [1m[35m (9.9ms)[0m  commit transaction
+Migrating to CreateDetails (20161105225633)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "details" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "receipt_id" integer, "product_id" integer, "cantidad_producto" integer, "precio" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_details_on_receipt_id" ON "details" ("receipt_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_details_on_receipt_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_details_on_receipt_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_details_on_product_id" ON "details" ("product_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161105225633"]]
+  [1m[36m (11.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddDescripcionToProducts (20161107072407)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "products" ADD "descripcion" text[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161107072407"]]
+  [1m[36m (9.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddValorTotalProductoToPurchaseReceipts (20161108162418)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "purchase_receipts" ADD "valor_total_producto" decimal[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161108162418"]]
+  [1m[36m (10.1ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveCantidadToPurchaseReceipts (20161108170415)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TEMPORARY TABLE "apurchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "provider_id" integer, "fecha" date, "numero_factura" integer, "cantidad" integer, "costo_unitario" decimal, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal) [0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_apurchase_receipts_on_provider_id" ON "apurchase_receipts" ("provider_id")
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "tindex_apurchase_receipts_on_product_id" ON "apurchase_receipts" ("product_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "purchase_receipts"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "purchase_receipts"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "purchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "provider_id" integer, "fecha" date, "numero_factura" integer, "costo_unitario" decimal, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal) 
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_apurchase_receipts_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_apurchase_receipts_on_product_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_purchase_receipts_on_product_id" ON "purchase_receipts" ("product_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_purchase_receipts_on_provider_id" ON "purchase_receipts" ("provider_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apurchase_receipts"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "apurchase_receipts"[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161108170415"]]
+  [1m[36m (10.5ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveProductIdToPurchaseReceipts (20161108170525)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "apurchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "provider_id" integer, "fecha" date, "numero_factura" integer, "costo_unitario" decimal, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal) [0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_product_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "tindex_apurchase_receipts_on_provider_id" ON "apurchase_receipts" ("provider_id")
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "tindex_apurchase_receipts_on_product_id" ON "apurchase_receipts" ("product_id")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "purchase_receipts"
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "purchase_receipts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "purchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "fecha" date, "numero_factura" integer, "costo_unitario" decimal, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_apurchase_receipts_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_apurchase_receipts_on_product_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_purchase_receipts_on_provider_id" ON "purchase_receipts" ("provider_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apurchase_receipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "apurchase_receipts"[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161108170525"]]
+  [1m[36m (11.6ms)[0m  [1mcommit transaction[0m
+Migrating to RemoveCostoUnitarioToPurchaseReceipts (20161108170618)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "apurchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "fecha" date, "numero_factura" integer, "costo_unitario" decimal, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "tindex_apurchase_receipts_on_provider_id" ON "apurchase_receipts" ("provider_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "purchase_receipts"
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "purchase_receipts"[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "purchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "fecha" date, "numero_factura" integer, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal) 
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_purchase_receipts_on_provider_id" ON "purchase_receipts" ("provider_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "apurchase_receipts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "apurchase_receipts"
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161108170618"]]
+  [1m[35m (10.0ms)[0m  commit transaction
+Migrating to RemoveValorTotalProductoToPurchaseReceipts (20161108170719)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "apurchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "fecha" date, "numero_factura" integer, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "valor_total_producto" decimal) 
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "tindex_apurchase_receipts_on_provider_id" ON "apurchase_receipts" ("provider_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "purchase_receipts"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "purchase_receipts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "purchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "provider_id" integer, "fecha" date, "numero_factura" integer, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_apurchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_purchase_receipts_on_provider_id" ON "purchase_receipts" ("provider_id")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "apurchase_receipts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "apurchase_receipts"[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20161108170719"]]
+  [1m[36m (9.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDetailPurchaseReceipts (20161108171054)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "detail_purchase_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "purchase_receipt_id" integer, "product_id" integer, "cantidad" integer, "valor_total" decimal, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_detail_purchase_receipts_on_purchase_receipt_id" ON "detail_purchase_receipts" ("purchase_receipt_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_detail_purchase_receipts_on_purchase_receipt_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_detail_purchase_receipts_on_purchase_receipt_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_detail_purchase_receipts_on_product_id" ON "detail_purchase_receipts" ("product_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161108171054"]]
+  [1m[35m (10.7ms)[0m  commit transaction
+Migrating to AddSocietyIdToDiscounts (20170313042937)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "discounts" ADD "society_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170313042937"]]
+  [1m[35m (10.1ms)[0m  commit transaction
+Migrating to AddCategoryIdToDiscounts (20170313044316)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "discounts" ADD "category_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170313044316"]]
+  [1m[35m (9.9ms)[0m  commit transaction
+Migrating to AddClientIdToReceipts (20170313045723)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "receipts" ADD "client_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170313045723"]]
+  [1m[35m (9.5ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_on_membership_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_detail_purchase_receipts_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_detail_purchase_receipts_on_product_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_detail_purchase_receipts_on_purchase_receipt_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_detail_purchase_receipts_on_purchase_receipt_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_details_on_product_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_details_on_product_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_details_on_receipt_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_details_on_receipt_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_discounts_on_categories_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_memberships_on_society_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_products_on_category_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_products_on_category_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_purchase_receipts_on_provider_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_membership_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_membership_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_receipts_on_forma_de_pago_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.3ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('leonardo') LIMIT 1
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('leonardo.merchan.1992@gmail.com') LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("username", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["username", "leonardo"], ["email", "leonardo.merchan.1992@gmail.com"], ["password_digest", "$2a$10$jLnmR7EGdssTZRuAvq93VO6eQfS2V.oCGeXvR3SKLZc2AdNnWBDjm"], ["created_at", "2017-03-13 04:59:46.841126"], ["updated_at", "2017-03-13 04:59:46.841126"]]
+  [1m[36m (10.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE LOWER("users"."username") = LOWER('esteban') LIMIT 1[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE LOWER("users"."email") = LOWER('mrobayon@unbosque.edu.co') LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("username", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["username", "esteban"], ["email", "mrobayon@unbosque.edu.co"], ["password_digest", "$2a$10$x3GeUvqady7zq1rwNVDwGO4YP6BWS2kCGeFi/KD5TNwd8rL2HHAke"], ["created_at", "2017-03-13 05:00:10.220523"], ["updated_at", "2017-03-13 05:00:10.220523"]]
+  [1m[35m (11.1ms)[0m  commit transaction
+
+
+Started GET "/" for 10.240.1.20 at 2017-03-13 05:00:29 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (15.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (64.9ms)
+Completed 200 OK in 700ms (Views: 686.5ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.1.20 at 2017-03-13 05:00:30 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started POST "/login" for 10.240.0.207 at 2017-03-13 05:00:40 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"zKoYYga9KOnZXDj6StTaYF8Eh9ayllhva1TMN11WfcNRwemnFYOOPyqO4tiaVdVRfxgQKYNnQt8N7iChUPkibw==", "session"=>{"email"=>"leonardo.merchan.1992@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Ingresar"}
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "leonardo.merchan.1992@gmail.com"]]
+Redirected to http://rubyonrailscourse-foxtech.c9users.io:8080/societies
+Completed 302 Found in 77ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/societies" for 10.240.0.207 at 2017-03-13 05:00:41 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SocietiesController#index as HTML
+  [1m[35mSociety Load (0.4ms)[0m  SELECT "societies".* FROM "societies"
+  Rendered societies/_society.html.erb (8.0ms)
+  Rendered societies/index.html.erb within layouts/application (32.3ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (26.8ms)
+Completed 200 OK in 222ms (Views: 200.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.0.207 at 2017-03-13 05:00:41 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.1.20 at 2017-03-13 05:00:41 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/societies/new" for 10.240.0.207 at 2017-03-13 05:00:44 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SocietiesController#new as HTML
+  [1m[35mCategory Load (0.3ms)[0m  SELECT "categories".* FROM "categories"  ORDER BY "categories"."nombre" ASC
+  Rendered societies/_discount_fields.html.erb (10.6ms)
+  Rendered societies/_form.html.erb (110.3ms)
+  Rendered societies/new.html.erb within layouts/application (113.5ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (10.8ms)
+Completed 200 OK in 263ms (Views: 247.5ms | ActiveRecord: 2.4ms)
+
+
+Started POST "/societies" for 10.240.0.186 at 2017-03-13 05:00:59 +0000
+Cannot render console from 10.240.0.186! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SocietiesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"40aQVXR1zRiXOe7GcV8dzxeIFkocrpTpzB9F8kFcf51+LWGQZ0trzmTrNOSh3hL+N5SBtS1fjlmqpalkTPMgMQ==", "society"=>{"nombre"=>"31321", "descripcion"=>"32132", "val_anual"=>"1321", "val_semestral"=>"32132", "val_mensual"=>"321"}, "commit"=>"Guardar"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "societies" ("nombre", "descripcion", "val_anual", "val_semestral", "val_mensual", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["nombre", "31321"], ["descripcion", "32132"], ["val_anual", 1321.0], ["val_semestral", 32132.0], ["val_mensual", 321.0], ["user_id", 1], ["created_at", "2017-03-13 05:00:59.386112"], ["updated_at", "2017-03-13 05:00:59.386112"]]
+  [1m[36m (18.6ms)[0m  [1mcommit transaction[0m
+Redirected to http://rubyonrailscourse-foxtech.c9users.io:8080/societies/1
+Completed 302 Found in 35ms (ActiveRecord: 20.4ms)
+
+
+Started GET "/societies/1" for 10.240.0.186 at 2017-03-13 05:00:59 +0000
+Cannot render console from 10.240.0.186! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SocietiesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSociety Load (0.4ms)[0m  SELECT  "societies".* FROM "societies" WHERE "societies"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT "categories".* FROM "categories" INNER JOIN "discounts" ON "categories"."id" = "discounts"."category_id" WHERE "discounts"."society_id" = ?[0m  [["society_id", 1]]
+  [1m[35mDiscount Load (0.2ms)[0m  SELECT "discounts".* FROM "discounts" WHERE "discounts"."society_id" = ?  [["society_id", 1]]
+  Rendered societies/show.html.erb within layouts/application (30.9ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (10.5ms)
+Completed 200 OK in 132ms (Views: 129.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.1.20 at 2017-03-13 05:01:00 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.0.186 at 2017-03-13 05:01:00 +0000
+Cannot render console from 10.240.0.186! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/societies.1" for 10.240.0.186 at 2017-03-13 05:01:01 +0000
+Cannot render console from 10.240.0.186! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SocietiesController#index as 
+  [1m[35mSociety Load (0.3ms)[0m  SELECT "societies".* FROM "societies"
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered societies/_society.html.erb (6.6ms)
+  Rendered societies/index.html.erb within layouts/application (14.6ms)
+  Rendered layouts/_navigation.html.erb (10.8ms)
+Completed 200 OK in 228ms (Views: 226.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.0.186 at 2017-03-13 05:01:02 +0000
+Cannot render console from 10.240.0.186! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.1.20 at 2017-03-13 05:01:02 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/products" for 10.240.0.207 at 2017-03-13 05:01:24 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  Rendered products/index.html.erb within layouts/application (3.0ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (10.5ms)
+Completed 200 OK in 110ms (Views: 103.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/products/new" for 10.240.0.182 at 2017-03-13 05:01:27 +0000
+Cannot render console from 10.240.0.182! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#new as HTML
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+  Rendered products/_form.html.erb (6.1ms)
+  Rendered products/new.html.erb within layouts/application (8.8ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (11.2ms)
+Completed 200 OK in 129ms (Views: 116.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/categories" for 10.240.1.19 at 2017-03-13 05:01:36 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+  Rendered categories/_category.html.erb (1.8ms)
+  Rendered categories/index.html.erb within layouts/application (6.6ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (10.6ms)
+Completed 200 OK in 147ms (Views: 146.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/mas-e2512a64973b9ea6504cc39379ee27b1fc51dcbd4702e35c33accee3f3431fe0.png" for 10.240.0.207 at 2017-03-13 05:01:37 +0000
+Cannot render console from 10.240.0.207! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/categories/new" for 10.240.1.20 at 2017-03-13 05:01:38 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#new as HTML
+  Rendered categories/_form.html.erb (99.8ms)
+  Rendered categories/new.html.erb within layouts/application (101.5ms)
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (11.3ms)
+Completed 200 OK in 202ms (Views: 200.8ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/categories" for 10.240.1.15 at 2017-03-13 05:01:44 +0000
+Cannot render console from 10.240.1.15! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"L3GaHGCXUnYxZpQje78CQcfNuoh+X4dA8jlQ15tu5H6yGmvZc6n0oMK0TgGrPg1w59Etd0+unfCUg7xBlsG70g==", "category"=>{"nombre"=>"2132", "descripcion"=>"321321"}, "commit"=>"Guardar"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "categories" ("nombre", "descripcion", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["nombre", "2132"], ["descripcion", "321321"], ["user_id", 1], ["created_at", "2017-03-13 05:01:44.536808"], ["updated_at", "2017-03-13 05:01:44.536808"]]
+  [1m[36m (12.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://rubyonrailscourse-foxtech.c9users.io:8080/categories/1
+Completed 302 Found in 43ms (ActiveRecord: 12.8ms)
+
+
+Started GET "/categories/1" for 10.240.0.69 at 2017-03-13 05:01:44 +0000
+Cannot render console from 10.240.0.69! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mCategory Load (0.3ms)[0m  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered categories/show.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (12.3ms)
+Completed 200 OK in 132ms (Views: 128.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.0.119 at 2017-03-13 05:01:45 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.1.19 at 2017-03-13 05:01:45 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/products" for 10.240.1.19 at 2017-03-13 05:01:46 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  [1m[35mProduct Load (0.4ms)[0m  SELECT "products".* FROM "products"
+  Rendered products/index.html.erb within layouts/application (1.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (18.5ms)
+Completed 200 OK in 163ms (Views: 161.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/products/new" for 10.240.0.179 at 2017-03-13 05:01:47 +0000
+Cannot render console from 10.240.0.179! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#new as HTML
+  [1m[35mCategory Load (0.4ms)[0m  SELECT "categories".* FROM "categories"
+  Rendered products/_form.html.erb (1.5ms)
+  Rendered products/new.html.erb within layouts/application (2.5ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (10.9ms)
+Completed 200 OK in 226ms (Views: 223.2ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/products" for 10.240.0.69 at 2017-03-13 05:01:58 +0000
+Cannot render console from 10.240.0.69! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"M3qp6sPnP/n9m1LwykKXBWYEzZmshEkN7mqonZ7IqEyuEVgv0NmZLw5JiNIaw5g0RhhaZp11U72I0EQLk2f34A==", "product"=>{"nombre"=>"1321", "category_id"=>"1", "descripcion"=>"32132", "cantidad"=>"23132", "valor_unitario"=>"32132"}, "commit"=>"Guardar"}
+Unpermitted parameter: descripcion
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "products" ("category_id", "nombre", "cantidad", "valor_unitario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["category_id", 1], ["nombre", "1321"], ["cantidad", 23132], ["valor_unitario", 32132.0], ["created_at", "2017-03-13 05:01:58.353885"], ["updated_at", "2017-03-13 05:01:58.353885"]]
+  [1m[35m (12.9ms)[0m  commit transaction
+Redirected to http://rubyonrailscourse-foxtech.c9users.io:8080/products/1
+Completed 302 Found in 19ms (ActiveRecord: 13.4ms)
+
+
+Started GET "/products/1" for 10.240.1.19 at 2017-03-13 05:01:58 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCategory Load (0.2ms)[0m  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered products/show.html.erb within layouts/application (6.2ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (10.6ms)
+Completed 200 OK in 137ms (Views: 134.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.0.182 at 2017-03-13 05:01:58 +0000
+Cannot render console from 10.240.0.182! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.1.19 at 2017-03-13 05:01:59 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/products" for 10.240.1.19 at 2017-03-13 05:02:05 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  [1m[35mProduct Load (0.3ms)[0m  SELECT "products".* FROM "products"
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered products/index.html.erb within layouts/application (6.1ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (9.8ms)
+Completed 200 OK in 100ms (Views: 98.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/categories" for 10.240.0.119 at 2017-03-13 05:02:14 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered categories/_category.html.erb (7.1ms)
+  Rendered categories/index.html.erb within layouts/application (10.2ms)
+  Rendered layouts/_navigation.html.erb (12.7ms)
+Completed 200 OK in 252ms (Views: 250.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/categories/new" for 10.240.0.69 at 2017-03-13 05:02:16 +0000
+Cannot render console from 10.240.0.69! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#new as HTML
+  Rendered categories/_form.html.erb (1.9ms)
+  Rendered categories/new.html.erb within layouts/application (7.1ms)
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (12.6ms)
+Completed 200 OK in 129ms (Views: 127.9ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/categories" for 10.240.0.119 at 2017-03-13 05:02:26 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NGlCiN27M+0T7fwmvfw3ZO91xFjOi2nCE4VqulARM6mpArNNzoWVO+A/JgRtfThVz2lTp/96c3J1P4YsXb5sBQ==", "category"=>{"nombre"=>"hola", "descripcion"=>"soy una categoria"}, "commit"=>"Guardar"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "categories" ("nombre", "descripcion", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["nombre", "hola"], ["descripcion", "soy una categoria"], ["user_id", 1], ["created_at", "2017-03-13 05:02:26.244227"], ["updated_at", "2017-03-13 05:02:26.244227"]]
+  [1m[35m (7.5ms)[0m  commit transaction
+Redirected to http://rubyonrailscourse-foxtech.c9users.io:8080/categories/2
+Completed 302 Found in 13ms (ActiveRecord: 8.0ms)
+
+
+Started GET "/categories/2" for 10.240.1.19 at 2017-03-13 05:02:26 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered categories/show.html.erb within layouts/application (0.4ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (10.9ms)
+Completed 200 OK in 104ms (Views: 102.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.0.119 at 2017-03-13 05:02:26 +0000
+Cannot render console from 10.240.0.119! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.1.19 at 2017-03-13 05:02:27 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/categories" for 10.240.0.179 at 2017-03-13 05:02:28 +0000
+Cannot render console from 10.240.0.179! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by CategoriesController#index as HTML
+  [1m[36mCategory Load (0.3ms)[0m  [1mSELECT "categories".* FROM "categories"[0m
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered categories/_category.html.erb (6.9ms)
+  Rendered categories/index.html.erb within layouts/application (9.4ms)
+  Rendered layouts/_navigation.html.erb (9.3ms)
+Completed 200 OK in 109ms (Views: 108.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/products" for 10.240.0.179 at 2017-03-13 05:02:30 +0000
+Cannot render console from 10.240.0.179! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  [1m[35mCategory Load (0.1ms)[0m  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered products/index.html.erb within layouts/application (6.1ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (9.6ms)
+Completed 200 OK in 104ms (Views: 102.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/products/new" for 10.240.0.179 at 2017-03-13 05:02:32 +0000
+Cannot render console from 10.240.0.179! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#new as HTML
+  [1m[35mCategory Load (0.3ms)[0m  SELECT "categories".* FROM "categories"
+  Rendered products/_form.html.erb (1.4ms)
+  Rendered products/new.html.erb within layouts/application (2.3ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (9.8ms)
+Completed 200 OK in 185ms (Views: 183.0ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/products" for 10.240.0.204 at 2017-03-13 05:02:52 +0000
+Cannot render console from 10.240.0.204! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vIN3b8BiOSpxBMqkvbYkykMrtAHQ3vvaNU0pENXphSYh6Iaq01yf/ILWEIZtNyv7Yzcj/uEv4WpT98WG2Ebaig==", "product"=>{"nombre"=>"sss", "category_id"=>"2", "descripcion"=>"ss", "cantidad"=>"5", "valor_unitario"=>"101"}, "commit"=>"Guardar"}
+Unpermitted parameter: descripcion
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "products" ("category_id", "nombre", "cantidad", "valor_unitario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["category_id", 2], ["nombre", "sss"], ["cantidad", 5], ["valor_unitario", 101.0], ["created_at", "2017-03-13 05:02:52.605353"], ["updated_at", "2017-03-13 05:02:52.605353"]]
+  [1m[35m (10.2ms)[0m  commit transaction
+Redirected to http://rubyonrailscourse-foxtech.c9users.io:8080/products/2
+Completed 302 Found in 16ms (ActiveRecord: 10.8ms)
+
+
+Started GET "/products/2" for 10.240.1.15 at 2017-03-13 05:02:52 +0000
+Cannot render console from 10.240.1.15! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mProduct Load (0.3ms)[0m  [1mSELECT  "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCategory Load (0.1ms)[0m  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered products/show.html.erb within layouts/application (1.5ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (11.9ms)
+Completed 200 OK in 117ms (Views: 114.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.1.15 at 2017-03-13 05:02:53 +0000
+Cannot render console from 10.240.1.15! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.0.69 at 2017-03-13 05:02:53 +0000
+Cannot render console from 10.240.0.69! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/products" for 10.240.1.15 at 2017-03-13 05:03:00 +0000
+Cannot render console from 10.240.1.15! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  [1m[35mProduct Load (0.4ms)[0m  SELECT "products".* FROM "products"
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCategory Load (0.1ms)[0m  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered products/index.html.erb within layouts/application (9.7ms)
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (16.9ms)
+Completed 200 OK in 275ms (Views: 272.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/purchase_receipts/new" for 10.240.1.64 at 2017-03-13 05:03:18 +0000
+Cannot render console from 10.240.1.64! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PurchaseReceiptsController#new as HTML
+  [1m[35mProvider Load (0.2ms)[0m  SELECT "providers".* FROM "providers"
+  Rendered purchase_receipts/_form.html.erb (36.4ms)
+  Rendered purchase_receipts/new.html.erb within layouts/application (39.4ms)
+Completed 500 Internal Server Error in 65ms (ActiveRecord: 1.2ms)
+
+ActionView::Template::Error (Missing partial purchase_receipts/_detail_purchase_receipt_fields, application/_detail_purchase_receipt_fields with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/ubuntu/code/rails_projects/proyectoPOS-Rails/app/views"
+  * "/usr/local/rvm/gems/ruby-2.3.1/gems/devise-bootstrap-views-0.0.9/app/views"
+  * "/usr/local/rvm/gems/ruby-2.3.1/gems/twitter-bootstrap-rails-3.2.2/app/views"
+  * "/usr/local/rvm/gems/ruby-2.3.1/gems/devise-3.5.10/app/views"
+):
+    34: <hr>
+    35: 
+    36:     <div align="center">
+    37:       <%= link_to_add_association 'Añadir producto', f,:detail_purchase_receipts,
+    38:                                   'data-association-insertion-node' => "#detail",
+    39:                                   'data-association-insertion-method' => "append",
+    40:                                   :wrap_object => Proc.new {|detail_purchase_receipt| detail_purchase_receipt.build_product; detail_purchase_receipt }%>
+  app/views/purchase_receipts/_form.html.erb:37:in `block in _app_views_purchase_receipts__form_html_erb___2963877208760625127_70187620773700'
+  app/views/purchase_receipts/_form.html.erb:1:in `_app_views_purchase_receipts__form_html_erb___2963877208760625127_70187620773700'
+  app/views/purchase_receipts/new.html.erb:4:in `_app_views_purchase_receipts_new_html_erb__1060944220263973918_70187620922420'
+
+
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (10.1ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.4ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /usr/local/rvm/gems/ruby-2.3.1/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (41.2ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.1.20 at 2017-03-13 05:03:35 +0000
+Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.0.241 at 2017-03-13 05:03:35 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255

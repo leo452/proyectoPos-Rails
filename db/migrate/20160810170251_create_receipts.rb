@@ -3,7 +3,6 @@ class CreateReceipts < ActiveRecord::Migration
     create_table :receipts do |t|
       t.date :fecha
       t.float :valor_total
-      t.references :clients, index: true, foreign_key: true
       t.timestamps null: false
     end
     add_attachment :receipts, :soporte
