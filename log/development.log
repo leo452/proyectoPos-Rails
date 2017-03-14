@@ -50572,3 +50572,78 @@ Cannot render console from 10.240.1.20! Allowed networks: 127.0.0.1, ::1, 127.0.
 
 Started GET "/assets/1.jpg" for 10.240.0.241 at 2017-03-13 05:03:35 +0000
 Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/" for 10.240.0.241 at 2017-03-14 00:31:52 +0000
+Cannot render console from 10.240.0.241! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (16.0ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (351.3ms)
+Completed 200 OK in 2285ms (Views: 2199.8ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.0.110 at 2017-03-14 00:31:55 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started POST "/login" for 10.240.0.110 at 2017-03-14 00:31:59 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uYKGPWqswI0WrqOYrD02j5I0I0ibniMx1Hm4wjhmmkAk6Xf4eZJmW+V8ebp8vDm+sii0t6pvOYGyw1RUNcnF7A==", "session"=>{"email"=>"leonardo.merchan.1992@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Ingresar"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1[0m  [["email", "leonardo.merchan.1992@gmail.com"]]
+Redirected to http://rubyonrailscourse-foxtech.c9users.io:8080/societies
+Completed 302 Found in 229ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/societies" for 10.240.0.110 at 2017-03-14 00:32:00 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SocietiesController#index as HTML
+  [1m[35mSociety Load (0.4ms)[0m  SELECT "societies".* FROM "societies"
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered societies/_society.html.erb (105.2ms)
+  Rendered societies/index.html.erb within layouts/application (113.4ms)
+  Rendered layouts/_navigation.html.erb (20.3ms)
+Completed 200 OK in 569ms (Views: 550.3ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.0.110 at 2017-03-14 00:32:01 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.0.110 at 2017-03-14 00:32:01 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/products" for 10.240.0.110 at 2017-03-14 00:32:04 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  [1m[35mCategory Load (0.2ms)[0m  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered products/index.html.erb within layouts/application (60.8ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (12.3ms)
+Completed 200 OK in 766ms (Views: 756.0ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/products" for 10.240.0.110 at 2017-03-14 00:34:15 +0000
+Cannot render console from 10.240.0.110! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.6ms)[0m  [1mSELECT "products".* FROM "products"[0m
+  [1m[35mCategory Load (0.3ms)[0m  SELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1mSELECT  "categories".* FROM "categories" WHERE "categories"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered products/index.html.erb within layouts/application (45.8ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_navigation.html.erb (153.5ms)
+Completed 200 OK in 450ms (Views: 447.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/2.jpg" for 10.240.1.19 at 2017-03-14 00:34:15 +0000
+Cannot render console from 10.240.1.19! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/1.jpg" for 10.240.1.15 at 2017-03-14 00:34:16 +0000
+Cannot render console from 10.240.1.15! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
